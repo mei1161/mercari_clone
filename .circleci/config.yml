@@ -22,7 +22,6 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_USERNAME: postgres
           POSTGRESS_PASSWORD: ""
-          POSTGRES_DB: mercari_clone_test
     working_directory: ~/repo
 
     steps:
