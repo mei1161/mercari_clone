@@ -10,9 +10,9 @@ jobs:
       - image: circleci/ruby:2.6.5-node-browsers
         environment:
           RAILS_ENV: test
-          PGHOST: <%= ENV.fetch('DB_HOST', 'db') %>
-          PGUSER: <%= ENV.fetch('DB_USERNAME', 'user') %>
-          PGPASSWORD: <%= ENV.fetch('DB_PASSWORD', 'password') %>
+          PGHOST: ENV['DB_HOST']
+          PGUSER: ENV['DB_USERNAME']
+          PGPASSWORD: ENV['DB_PASSWORD']
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
