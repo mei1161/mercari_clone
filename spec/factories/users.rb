@@ -6,7 +6,7 @@ FactoryBot.define do
   end
 
   factory :invalid_user, class: User do
-    name { ' ' }
+    name { '' }
     email { 'test2@example.com' }
     password { 'password' }
   end

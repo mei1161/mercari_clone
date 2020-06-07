@@ -3,21 +3,22 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :request do
   let(:user) { create(:user) }
   let(:user_params) { attributes_for(:user) }
-  # invalid_userをFactoryBotに追加する
-  # このコメントは削除してください
-  let(:invalid_user) { create(:invlaid_user) }
   let(:invalid_user_params) { attributes_for(:invalid_user) }
-  # change_user_params を作成する
-  let(:change_user_params) { attributes_for(:user, name: 'hoge', current_password: 'password', password_confirmation: 'password') }
+  let(:change_user_params) { attributes_for(:user, name: 'hoge', current_password: 'password', biography: 'hogehoge',birthday: Date.parse('2019-02-10')) }
 
   describe 'POST /users' do
     it 'ユーザーの作成が成功すること' do
       expect do
         post user_registration_path, params: { user: user_params }
-        expect(response).to redirect_to root_url
+        created_user = User.find_by(email: 'test_1@example.com')
+        expect(created_user).not_to be_nil
+        expect(created_user.name).to eq('test')
       end.to change(User, :count).by 1
     end
     it 'ユーザーの作成が失敗すること' do
+      post user_registration_path, params: { user: invalid_user_params }
+      failed_user = User.find_by(email: 'test2@example.com')
+      expect(failed_user).to be_nil
     end
   end
 
@@ -50,8 +51,10 @@ RSpec.describe 'Users', type: :request do
     it 'プロフィールの変更ができること' do
       sign_in user
       put user_registration_path, params: { user: change_user_params }
-      changed_user = User.find_by(email: user.email)
+      changed_user = User.find_by(email: 'test_1@example.com')
       expect(changed_user.name).to eq('hoge')
+      expect(changed_user.biography).to eq('hogehoge')
+      expect(changed_user.birthday).to eq(Date.parse('2019-2-10'))
     end
   end
 
@@ -59,7 +62,7 @@ RSpec.describe 'Users', type: :request do
     it 'ユーザーの削除ができること' do
       sign_in user
       delete user_registration_path
-      deleted_user = User.find_by(email: user.email)
+      deleted_user = User.find_by(email: 'test_1@example.com')
       expect(deleted_user).to be_nil
     end
   end
