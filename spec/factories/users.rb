@@ -1,7 +1,13 @@
 FactoryBot.define do
-  factory :user do #factory :testuser, class: User do のようにクラスを明示すればモデル名以外のデータも作れます。
-    name { "test" }
-    sequence(:email) { |n| "TEST#{n}@example.com" }
-    password { "password" }
+  factory :user do
+    name { 'test' }
+    email { 'test_1@example.com' }
+    password { 'password' }
+  end
+
+  factory :invalid_user, class: User do
+    name { ' ' }
+    email { 'test2@example.com' }
+    password { 'password' }
   end
 end
