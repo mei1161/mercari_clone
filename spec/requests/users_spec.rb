@@ -23,8 +23,26 @@ RSpec.describe 'Users', type: :request do
     end
   end
 
+  describe 'GET /users/confirmation' do
+    it 'トークンが間違っていた時メール認証に失敗すること' do
+      user
+      get user_confirmation_path(confirmation_token: 'fuga')
+      expect(response.body).to include('Confirmation token is invalid')
+      created_user = User.find_by(email: 'test_1@example.com')
+      expect(created_user.confirmed_at).to be_nil
+    end
+
+    it 'トークンが合っている時メール認証に成功すること' do
+      get user_confirmation_path(confirmation_token: user.confirmation_token)
+      expect(response).to redirect_to new_user_session_path
+      created_user = User.find_by(email: 'test_1@example.com')
+      expect(created_user.confirmed_at).not_to be_nil
+    end
+  end
+
   describe 'DELETE /users/sign_out' do
     it 'ログアウトできること' do
+      user.confirm
       sign_in user
       delete destroy_user_session_path
       expect(response).to redirect_to root_url
@@ -39,6 +57,7 @@ RSpec.describe 'Users', type: :request do
   describe 'POST /users/sign_in' do
     it 'ログインできること' do
       user
+      user.confirm
       post user_session_path, params: { user: user_params }
       expect(response).to redirect_to root_url
     end
@@ -51,6 +70,7 @@ RSpec.describe 'Users', type: :request do
 
   describe 'PATCH /users' do
     it 'プロフィールの変更ができること' do
+      user.confirm
       sign_in user
       put user_registration_path, params: { user: change_user_params }
       changed_user = User.find_by(email: 'test_1@example.com')
@@ -62,6 +82,7 @@ RSpec.describe 'Users', type: :request do
 
   describe 'DELETE /users' do
     it 'ユーザーの削除ができること' do
+      user.confirm
       sign_in user
       delete user_registration_path
       deleted_user = User.find_by(email: 'test_1@example.com')

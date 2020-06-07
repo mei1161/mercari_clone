@@ -64,3 +64,5 @@ gem 'dotenv-rails'
 gem 'haml-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'devise'
+gem 'letter_opener'
+gem 'letter_opener_web'
