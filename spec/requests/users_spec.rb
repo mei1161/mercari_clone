@@ -4,7 +4,7 @@ RSpec.describe 'Users', type: :request do
   let(:user) { create(:user) }
   let(:user_params) { attributes_for(:user) }
   let(:invalid_user_params) { attributes_for(:invalid_user) }
-  let(:change_user_params) { attributes_for(:user, name: 'hoge', current_password: 'password', biography: 'hogehoge',birthday: Date.parse('2019-02-10')) }
+  let(:change_user_params) { attributes_for(:user, name: 'hoge', current_password: 'password', biography: 'hogehoge', birthday: Date.parse('2019-02-10')) }
 
   describe 'POST /users' do
     it 'ユーザーの作成が成功すること' do
@@ -15,6 +15,7 @@ RSpec.describe 'Users', type: :request do
         expect(created_user.name).to eq('test')
       end.to change(User, :count).by 1
     end
+
     it 'ユーザーの作成が失敗すること' do
       post user_registration_path, params: { user: invalid_user_params }
       failed_user = User.find_by(email: 'test2@example.com')
@@ -41,6 +42,7 @@ RSpec.describe 'Users', type: :request do
       post user_session_path, params: { user: user_params }
       expect(response).to redirect_to root_url
     end
+
     it 'ログインできないこと' do
       post user_session_path, params: { user: invalid_user_params }
       expect(response).to have_http_status 200
