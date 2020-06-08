@@ -11,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 class PointMaster < ApplicationRecord
-  validates :amount, presence: true, uniqueness: true
+  validates :amount, presence: true
   validates :price, presence: true
   validates :started_at, presence: true
   validates :ended_at, presence: true
