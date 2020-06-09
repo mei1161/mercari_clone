@@ -3,8 +3,8 @@
 # Table name: point_histories
 #
 #  id         :bigint           not null, primary key
-#  date       :date
-#  integer    :point
+#  date       :datetime
+#  point      :integer
 #  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -15,7 +15,7 @@
 #
 #  index_point_histories_on_user_id  (user_id)
 #
-class PointBuy < PointHistory
+class PointBuyHistory < PointHistory
   belongs_to :user
   validates :point, presence: true
   validates :date, presence: true

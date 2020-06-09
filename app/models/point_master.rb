@@ -4,9 +4,9 @@
 #
 #  id         :bigint           not null, primary key
 #  amount     :integer
-#  ended_at   :date
+#  ended_at   :datetime
 #  price      :integer
-#  started_at :date
+#  started_at :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

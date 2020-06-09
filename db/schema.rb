@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 2020_06_08_135605) do
   create_table "point_histories", force: :cascade do |t|
     t.bigint "user_id"
     t.string "type"
-    t.point "integer"
-    t.date "date"
+    t.integer "point"
+    t.datetime "date"
     t.bigint "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 2020_06_08_135605) do
   create_table "point_masters", force: :cascade do |t|
     t.integer "amount"
     t.integer "price"
-    t.date "started_at"
-    t.date "ended_at"
+    t.datetime "started_at"
+    t.datetime "ended_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -76,8 +76,7 @@ ActiveRecord::Schema.define(version: 2020_06_08_135605) do
     t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "points"
-    t.integer "point"
+    t.integer "point", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

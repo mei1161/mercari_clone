@@ -11,8 +11,7 @@
 #  email                  :string           not null
 #  encrypted_password     :string           not null
 #  name                   :string           not null
-#  point                  :integer
-#  points                 :integer
+#  point                  :integer          default(0)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string

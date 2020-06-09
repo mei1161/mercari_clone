@@ -3,8 +3,8 @@
 # Table name: point_histories
 #
 #  id         :bigint           not null, primary key
-#  date       :date
-#  integer    :point
+#  date       :datetime
+#  point      :integer
 #  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

@@ -1,0 +1,16 @@
+
+= form_with url: purchase_path, method: :post, remote: true do |f|
+  %ul{style:'width: 300px;'}
+    %li
+      %ul{style: 'display:flex;justify-content: space-between;'}
+        %li= ""
+        %li= "ポイント数"
+        %li= "金額"
+    - @point_masters.each do |point_master|
+      %li
+        %ul{style: 'display:flex;justify-content: space-between; '}
+          %li
+            = f.radio_button :point_master_id, point_master.id, id: "point_radio_#{point_master.amount}", checked: false
+          %li=point_master.amount
+          %li=point_master.price
+  = f.submit "購入"
