@@ -33,4 +33,10 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
   validates :biography, length: { maximum: 150 }
+
+  def point_purchase(point_master)
+    self.point += point_master.amount
+    save
+    PointPurchaseHistory.create(user: self, date: DateTime.now, parent_id: point_master.id, point: point_master.amount)
+  end
 end

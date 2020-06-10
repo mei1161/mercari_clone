@@ -10,9 +10,10 @@ class PurchasesController < ApplicationController
       redirect_to purchase_path, flash: { danger: 'データがないため、購入できません。' }
       return
     end
-    @user = current_user
-    @user.point += @point_master.amount
-    @user.save
-    PointPurchaseHistory.create(user: @user, date: DateTime.now, parent_id: params[:point_master_id], point: @point_master.amount)
+    # @user = current_user
+    # @user.point += @point_master.amount
+    # @user.save
+    # PointPurchaseHistory.create(user: @user, date: DateTime.now, parent_id: params[:point_master_id], point: @point_master.amount)
+    current_user.point_purchase(@point_master)
   end
 end
