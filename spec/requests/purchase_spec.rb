@@ -8,9 +8,7 @@ RSpec.describe 'purchases', type: :request do
     it 'ポイントの購入ができること' do
       user.confirm
       sign_in user
-      post purchase_path, params:{ point_master_id: point_master.id }
-      purchased_user = User.find(user.id)
-      expect(purchased_user.point).to be > 0
+      expect{ post purchase_path, params:{ point_master_id: point_master.id } }.to change{ user.point }.from(0).to(100)
     end
   end
 end
