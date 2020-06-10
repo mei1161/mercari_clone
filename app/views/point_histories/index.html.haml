@@ -1,5 +1,5 @@
 %ul{style:'width: 600px;'}
-  - @point_histories.each do |point_history|
+  - @point_histories.reverse_each do |point_history|
     %li
       %ul{style: 'display:flex;justify-content: space-between;'}
         %li= l(point_history.date, format: :date_time)
