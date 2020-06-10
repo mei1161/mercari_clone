@@ -55,4 +55,8 @@ Lint/MixedRegexpCaptureTypes:
 Style/RedundantRegexpCharacterClass:
   Enabled: true
 Style/RedundantRegexpEscape:
-  Enabled: true  
+  Enabled: true
+Metrics/AbcSize:
+  Enabled: false
+Layout/LineLength:
+  Max: 150

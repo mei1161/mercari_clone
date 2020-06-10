@@ -1,0 +1,2 @@
+module PointHistoryHelper
+end
