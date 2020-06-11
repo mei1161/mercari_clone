@@ -59,11 +59,12 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'activeadmin'
 gem 'annotate'
+gem 'devise'
 gem 'dotenv-rails'
 gem 'haml-rails'
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'devise'
 gem 'letter_opener'
 gem 'letter_opener_web'
-gem 'activeadmin'
+gem 'rails-i18n'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

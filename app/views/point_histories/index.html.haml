@@ -2,7 +2,7 @@
   - @point_histories.reverse_each do |point_history|
     %li
       %ul{style: 'display:flex;justify-content: space-between;'}
-        %li= l(point_history.date, format: :date_time)
+        %li= l(point_history.date)
         - if point_history.type == "PointPurchaseHistory"
           %li ポイント購入
         - elsif point_history.type == "PointBuyHistory"
