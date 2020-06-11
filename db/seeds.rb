@@ -10,5 +10,5 @@ User.create!(email: 'mei@gmail.com', name: 'mei', password: 'password', password
 PointMaster.create!(amount: 100, price: 120, started_at: DateTime.now, ended_at: '2025-12-31')
 PointMaster.create!(amount: 500, price: 520, started_at: DateTime.now, ended_at: '2025-12-31')
 PointMaster.create!(amount: 1000, price: 1020, started_at: DateTime.now, ended_at: '2025-12-31')
-Category.create!(name: '美容' )
-Category.create!(name: 'PC' )
+Category.create!(name: '美容')
+Category.create!(name: 'PC')
