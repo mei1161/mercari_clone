@@ -1,5 +1,6 @@
 - if signed_in?
-  = link_to 'ログアウト', destroy_user_session_path, method: :delete
-  = link_to '更新', edit_user_registration_path
-  = link_to 'ポイント購入', purchase_path
-  = link_to 'ポイント履歴', point_histories_path
+  %ul
+    %li= link_to 'ログアウト', destroy_user_session_path, method: :delete
+    %li= link_to '更新', edit_user_registration_path
+    %li= link_to 'ポイント購入', purchase_path
+    %li= link_to 'ポイント履歴', point_histories_path
