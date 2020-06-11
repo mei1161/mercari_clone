@@ -27,7 +27,7 @@ RSpec.describe 'Users', type: :request do
     it 'トークンが間違っていた時メール認証に失敗すること' do
       user
       get user_confirmation_path(confirmation_token: 'fuga')
-      expect(response.body).to include('Confirmation token is invalid')
+      expect(response.body).to include('パスワード確認用トークンは不正な値です')
       created_user = User.find_by(email: 'test_1@example.com')
       expect(created_user.confirmed_at).to be_nil
     end
