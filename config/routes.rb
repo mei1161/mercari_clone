@@ -21,6 +21,6 @@ Rails.application.routes.draw do
     resource :purchase
   end
 
-  resources :items, only[:index, :show, :create, :destroy, :edit]
+  resources :items, only: [:index, :show, :create, :destroy, :edit]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
