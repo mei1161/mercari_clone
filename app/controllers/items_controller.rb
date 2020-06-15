@@ -10,9 +10,14 @@ class ItemsController < ApplicationController
     @item.user = current_user
     if @item.save
       pp 'success'
+      redirect_to item_path(@item.id)
     else
       pp 'failed'
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   private
