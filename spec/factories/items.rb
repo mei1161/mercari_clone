@@ -3,6 +3,7 @@
 # Table name: items
 #
 #  id                   :bigint           not null, primary key
+#  images               :json
 #  include_shipping_fee :boolean
 #  item_status          :integer
 #  name                 :string

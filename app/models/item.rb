@@ -3,6 +3,7 @@
 # Table name: items
 #
 #  id                   :bigint           not null, primary key
+#  images               :json
 #  include_shipping_fee :boolean
 #  item_status          :integer
 #  name                 :string
@@ -20,6 +21,9 @@
 #  index_items_on_user_id      (user_id)
 #
 class Item < ApplicationRecord
+  mount_uploaders :images, ImageUploader
+  serialize :images
+  ## validation
   belongs_to :user
   belongs_to :category
   validates :price, presence: true, numericality: { greater_than: 5 }
