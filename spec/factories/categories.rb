@@ -9,5 +9,6 @@
 #
 FactoryBot.define do
   factory :category do
+    name { 'ペット用品' }
   end
 end
