@@ -17,4 +17,15 @@ RSpec.describe 'items', type: :request do
       expect(created_item.user.name).to eq(user.name)
     end
   end
+
+  describe 'items/show' do
+    it '詳細ページで画像が確認できる' do
+      user.confirm
+      sign_in user
+      category
+      item
+      get item_path(id: item.id)
+      expect(response.body).to include('img')
+    end
+  end
 end
