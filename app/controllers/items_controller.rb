@@ -8,12 +8,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user = current_user
-    if @item.save
-      pp 'success'
-      redirect_to item_path(@item.id)
-    else
-      pp 'failed'
-    end
+    redirect_to item_path(@item.id) if @item.save
   end
 
   def show
