@@ -13,6 +13,8 @@ RSpec.describe 'items', type: :request do
       post items_path, params: { item: item_params }
       created_item = Item.find_by(name: item.name)
       expect(created_item.name).to eq(item.name)
+      expect(created_item.category.name).to eq(category.name)
+      expect(created_item.user.name).to eq(user.name)
     end
   end
 end
