@@ -8,7 +8,12 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user = current_user
-    redirect_to item_path(@item.id) if @item.save
+    if @item.save
+      redirect_to item_path(@item.id)
+    else
+      @categories = Category.all
+      render 'new'
+    end
   end
 
   def show

@@ -30,4 +30,14 @@ FactoryBot.define do
     include_shipping_fee { true }
     images { [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/factories/images/test.jpg'))] }
   end
+
+  factory :invalid_item_params, class: Item do
+    price { 0 }
+    name { 'hogehogehoge' }
+    transaction_status { 'draft' }
+    item_status { 'new' }
+    text { 'hogehoge' }
+    include_shipping_fee { true }
+    images { [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/factories/images/test.jpg'))] }
+  end
 end
