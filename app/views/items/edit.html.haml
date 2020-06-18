@@ -1,0 +1,32 @@
+= form_with model: @item, local: true do |f|
+  .form-group
+    = f.label :name
+    %br
+    = f.text_field :name
+  .form-group
+    = f.label :text
+    %br
+    = f.text_area :text
+  .form-group
+    = f.label :transaction_status
+    %br
+    = f.select :transaction_status, options_for_select(Item.transaction_statuses.keys)
+  .form-group
+    = f.label :item_status
+    %br
+    = f.select :item_status, options_for_select(Item.item_statuses.keys)
+  .form-group
+    = f.label :price
+    %br
+    = f.text_field :price
+  .form-group
+    = f.label :category
+    %br
+    = f.select :category_id, @categories.map{ |category| [category.name, category.id] }
+  .form-group
+    = f.label :include_shipping_fee
+    %br
+    = f.check_box(:include_shipping_fee)
+  .form-group
+    = f.file_field :images, multiple: true
+  = f.submit
