@@ -10,4 +10,5 @@
   %li= "送料の負担 #{fee}"
   %li= "#{@item.price}円"
 %p= @item.text
-  
+- @item.images.each do |image|
+  = image_tag image.url

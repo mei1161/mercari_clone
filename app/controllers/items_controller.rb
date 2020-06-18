@@ -8,7 +8,12 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user = current_user
-    redirect_to item_path(@item.id) if @item.save
+    if @item.save
+      redirect_to item_path(@item.id)
+    else
+      @categories = Category.all
+      render 'new'
+    end
   end
 
   def show
@@ -18,6 +23,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:category_id, :price, :name, :transaction_status, :include_shipping_fee, :text, :item_status)
+    params.require(:item).permit(:category_id, :price, :name, :transaction_status, :include_shipping_fee, :text, :item_status, { images: [] })
   end
 end

@@ -27,4 +27,6 @@
     = f.label :include_shipping_fee
     %br
     = f.check_box(:include_shipping_fee)
+  .form-group
+    = f.file_field :images, multiple: true
   = f.submit
