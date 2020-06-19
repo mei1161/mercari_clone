@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!
   def index
     @items = Item.where(user_id: current_user.id)
+    @draft = @items.where(transaction_status: 0)
   end
 
   def new
