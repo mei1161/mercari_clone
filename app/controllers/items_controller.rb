@@ -10,7 +10,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-    pp params
     @item = Item.new(item_params)
     @item.user = current_user
 
@@ -24,12 +23,6 @@ class ItemsController < ApplicationController
       @categories = Category.all
       render 'new'
     end
-    # if @item.save
-    #  redirect_to item_path(@item.id)
-    # else
-    #  @categories = Category.all
-    #  render 'new'
-    # end
   end
 
   def show
