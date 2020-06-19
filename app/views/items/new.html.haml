@@ -29,4 +29,5 @@
     = f.check_box(:include_shipping_fee)
   .form-group
     = f.file_field :images, multiple: true
-  = f.submit
+  = f.submit '出品する', name: 'submit'
+  = f.submit '下書きに保存', name: 'draft_submit'
