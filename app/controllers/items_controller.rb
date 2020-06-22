@@ -42,8 +42,7 @@ class ItemsController < ApplicationController
     elsif @item.update(item_params)
       redirect_to @item
     else
-        render 'edit'
-      end
+      render 'edit'
     end
   end
 
