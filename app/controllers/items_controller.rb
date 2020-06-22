@@ -39,10 +39,9 @@ class ItemsController < ApplicationController
     if params[:draft_submit]
       @item.save(validate: false)
       redirect_to @item
+    elsif @item.update(item_params)
+      redirect_to @item
     else
-      if @item.update(item_params)
-        redirect_to @item
-      else
         render 'edit'
       end
     end
