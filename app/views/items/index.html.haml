@@ -1,4 +1,6 @@
-- @items.each do |item|
+%h2
+公開中
+- @sale.each do |item|
   .item-box
     %ul
       %li= link_to "#{item.name}", item_path(item.id)

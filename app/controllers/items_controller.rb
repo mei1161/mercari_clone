@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.where(user_id: current_user.id)
     @draft = @items.where(transaction_status: 0)
+    @sale = @items.where.not(transaction_status: 0)
   end
 
   def new
