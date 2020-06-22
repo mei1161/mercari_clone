@@ -18,11 +18,12 @@ class ItemsController < ApplicationController
       @item.save(validate: false)
       redirect_to items_path
     elsif params[:submit]
-      @item.save
-      redirect_to item_path(@item.id)
-    else
-      @categories = Category.all
-      render 'new'
+      if @item.save
+        redirect_to item_path(@item.id)
+      else
+        @categories = Category.all
+        render 'new'
+      end
     end
   end
 
@@ -34,10 +35,14 @@ class ItemsController < ApplicationController
     @categories = Category.all
     @item = Item.find(params[:id])
 
-    if @item.update(item_params)
-      redirect_to @item
-    else
-      render 'edit'
+    if params[:draft_submit]
+      @item.update(validate: false)
+    elsif params[:submit]
+      if @item.update(item_params)
+        redirect_to @item
+      else
+        render 'edit'
+      end
     end
   end
 
