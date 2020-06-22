@@ -37,8 +37,9 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     if params[:draft_submit]
-      @item.update(validate: false)
-    elsif params[:submit]
+      @item.save(validate: false)
+      redirect_to @item
+    else
       if @item.update(item_params)
         redirect_to @item
       else
