@@ -39,6 +39,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     if params[:draft_submit]
+      @item.assign_attributes(item_params)
       @item.assign_attributes(transaction_status: :draft)
       @item.save(validate: false)
       redirect_to @item
