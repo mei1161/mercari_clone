@@ -17,9 +17,17 @@ Rails.application.routes.draw do
     resources :point_histories
   end
 
+  resources :users do
+    member do
+      get :drafts
+    end
+  end
+
   scope :point do
     resource :purchase
   end
+
+  
 
   resources :items, only: %i[index show create destroy edit new update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
