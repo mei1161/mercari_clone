@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   scope :user do
     resources :point_histories
-    resources :drafts
+    resources :drafts, only: %i[index show]
   end
 
   scope :point do
