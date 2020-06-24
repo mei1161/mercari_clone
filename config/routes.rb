@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root "users#drafts"
+  root "items#index"
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -15,19 +15,12 @@ Rails.application.routes.draw do
 
   scope :user do
     resources :point_histories
-  end
-
-  resources :users do
-    member do
-      get :drafts
-    end
+    resources :drafts
   end
 
   scope :point do
     resource :purchase
   end
-
-  
 
   resources :items, only: %i[index show create destroy edit new update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

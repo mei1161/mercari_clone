@@ -1,10 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @items = Item.where(user_id: current_user.id)
-    @draft = @items.where(transaction_status: 0)
-    @sale = @items.where.not(transaction_status: 0)
-    pp @sale
+    @items = Item.where.not(transaction_status: :draft)
   end
 
   def new
