@@ -18,6 +18,7 @@ class ItemsController < ApplicationController
       @item.save(validate: false)
       redirect_to items_path
     elsif params[:submit]
+      @item.assign_attributes(transaction_status: :sale)
       if @item.save
         redirect_to item_path(@item.id)
       else
