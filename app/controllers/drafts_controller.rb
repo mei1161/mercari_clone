@@ -6,5 +6,6 @@ class DraftsController < ApplicationController
 
   def show
     @item = current_user.items.find(params[:id])
+    @category = Category.all
   end
 end
