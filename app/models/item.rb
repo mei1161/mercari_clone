@@ -26,6 +26,7 @@ class Item < ApplicationRecord
   ## validation
   belongs_to :user
   belongs_to :category
+  has_many :likes, dependent: :destroy
   validates :price, presence: true, numericality: { greater_than: 5 }
   validates :name, presence: true
   validates :transaction_status, presence: true

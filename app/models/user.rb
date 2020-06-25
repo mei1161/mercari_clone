@@ -34,6 +34,8 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :biography, length: { maximum: 150 }
   has_many :items
+  has_many :likes
+  has_many :liked_items, through: :likes, source: :item
 
   def point_purchase(point_master)
     self.point += point_master.amount
