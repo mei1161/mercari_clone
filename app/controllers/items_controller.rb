@@ -42,6 +42,7 @@ class ItemsController < ApplicationController
       @item.save(validate: false)
       redirect_to @item
     elsif @item.update(item_params)
+      @item.sale!
       redirect_to @item
     else
       render 'edit'
