@@ -7,3 +7,6 @@
     %li= link_to 'アイテム新規作成', new_item_path
     %li= link_to 'アイテム一覧', user_path(current_user.id)
     %li= link_to '下書き一覧', drafts_path
+  %ul
+    - @items.each do |item|
+      %li= link_to "#{item.name}", item_path(item)
