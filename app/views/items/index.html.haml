@@ -1,3 +1,8 @@
-- @items.each do |item|
+- if user_signed_in?
   %ul
-    %li= link_to "#{item.name}", item_path(item)
+    %li= link_to 'ログアウト', destroy_user_session_path, method: :delete
+    %li= link_to '更新', edit_user_registration_path
+    %li= link_to 'ポイント購入', purchase_path
+    %li= link_to 'ポイント履歴', point_histories_path
+    %li= link_to 'アイテム新規作成', new_item_path
+    %li= link_to '下書き一覧', drafts_path
