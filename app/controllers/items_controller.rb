@@ -1,10 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @items = Item.where(user_id: current_user.id)
-    @draft = @items.where(transaction_status: 0)
-    @sale = @items.where.not(transaction_status: 0)
-    pp @sale
+    @items = Item.where.not(transaction_status: :draft)
   end
 
   def new
@@ -21,6 +18,7 @@ class ItemsController < ApplicationController
       @item.save(validate: false)
       redirect_to items_path
     elsif params[:submit]
+      @item.assign_attributes(transaction_status: :sale)
       if @item.save
         redirect_to item_path(@item.id)
       else
@@ -44,6 +42,7 @@ class ItemsController < ApplicationController
       @item.save(validate: false)
       redirect_to @item
     elsif @item.update(item_params)
+      @item.sale!
       redirect_to @item
     else
       render 'edit'

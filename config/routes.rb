@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root "users#show"
+  root "items#index"
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   scope :user do
     resources :point_histories
+    resources :drafts, only: %i[index show]
   end
 
   scope :point do

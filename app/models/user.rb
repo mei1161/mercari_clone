@@ -33,6 +33,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
   validates :biography, length: { maximum: 150 }
+  has_many :items
 
   def point_purchase(point_master)
     self.point += point_master.amount
