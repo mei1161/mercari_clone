@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resource :purchase
   end
 
+  resources :likes, only: %i[create destroy]
+
   resources :items, only: %i[index show create destroy edit new update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
