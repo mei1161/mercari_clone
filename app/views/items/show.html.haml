@@ -2,6 +2,7 @@
 %ul
   %li="出品者 #{@item.user.name}"
   %li= "カテゴリー #{@item.category.name}"
+  %li= "transaction_status #{@item.transaction_status}"
   %li= "商品の状態 #{@item.item_status}"
   - if @item.include_shipping_fee == true
     - fee= "送料込み(出品者負担)"
