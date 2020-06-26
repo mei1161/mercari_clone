@@ -7,6 +7,7 @@ RSpec.describe 'items', type: :request do
   let(:item) { create(:item, user_id: user.id, category_id: category.id) }
   let(:invalid_item_params) { attributes_for(:invalid_item_params, user_id: user.id, category_id: category.id) }
   let(:change_item_params) { attributes_for(:item, price: 17_000) }
+  let(:draft_item_params) {attributes_for(:item, transaction_status: :draft)}
   let(:invalid_changed_item_params) { attributes_for(:item, price: 200) }
   describe 'POST items' do
     it '新しい出品を作成できること' do
@@ -48,7 +49,6 @@ RSpec.describe 'items', type: :request do
       pp response
       updated_item = Item.find(item.id)
       expect(updated_item.price).to eq(17_000)
-      
     end
 
     it 'パラメータが間違えている場合更新ができない' do
@@ -67,6 +67,19 @@ RSpec.describe 'items', type: :request do
       delete item_path(item.id)
       deleted_item = Item.find_by(name: 'hoge')
       expect(deleted_item).to be_nil
+    end
+  end
+
+  describe 'edit/item draft' do
+    it 'アイテムを下書きで保存するとitems/showが見えなくなる' do
+      user.confirm
+      sign_in user
+      category
+      item
+      patch item_path(item.id), params: { item: draft_item_params }
+      get item_path(item.id)
+      pp response
+      expect(response).to have_http_status 200
     end
   end
 end
