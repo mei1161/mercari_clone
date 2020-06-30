@@ -24,7 +24,7 @@ FactoryBot.define do
   factory :item do
     price { 1200 }
     name { 'hoge' }
-    transaction_status { 'draft' }
+    transaction_status { 'sale' }
     item_status { 'new' }
     text { 'hogehoge' }
     include_shipping_fee { true }

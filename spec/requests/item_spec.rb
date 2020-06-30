@@ -7,7 +7,7 @@ RSpec.describe 'items', type: :request do
   let(:item) { create(:item, user_id: user.id, category_id: category.id) }
   let(:invalid_item_params) { attributes_for(:invalid_item_params, user_id: user.id, category_id: category.id) }
   let(:change_item_params) { attributes_for(:item, price: 17_000) }
-  let(:draft_item_params) { attributes_for(:item, transaction_status: 'draft') }
+  let(:change_draft_params) { attributes_for(:item, transaction_status: :draft) }
   let(:invalid_changed_item_params) { attributes_for(:item, price: 200) }
   describe 'POST items' do
     it '新しい出品を作成できること' do
@@ -75,9 +75,10 @@ RSpec.describe 'items', type: :request do
       sign_in user
       category
       item
-      get item_path(item.id)
-      pp response
-      expect(response).to have_http_status 200
+      patch item_path(item.id), params: { item: change_draft_params, draft_submit: '下書きに保存' }
+      expect{
+        get item_path(item.id)
+      }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end
