@@ -2,6 +2,7 @@
 %ul
   %li="出品者 #{@item.user.name}"
   %li= "カテゴリー #{@item.category.name}"
+  %li= "transaction_status #{@item.transaction_status}"
   %li= "商品の状態 #{@item.item_status}"
   - if @item.include_shipping_fee == true
     - fee= "送料込み(出品者負担)"
@@ -12,6 +13,11 @@
 %p= @item.text
 - @item.images.each do |image|
   = image_tag image.url
+- unless @item.likes.exists?(user_id: current_user.id)
+  = button_to 'いいね', likes_path(id: @item.id), method: :post
+- else
+  %p いいね済
+  = button_to 'いいねの取り消し', like_path(@item), method: :delete
 
 - if @item.user_id == current_user.id
   = button_to "編集", edit_item_path(@item), method: :get

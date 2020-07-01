@@ -26,6 +26,7 @@ class Item < ApplicationRecord
   ## validation
   belongs_to :user
   belongs_to :category
+  has_many :likes, dependent: :destroy
   validates :price, presence: true, numericality: { greater_than: 5 }
   validates :name, presence: true
   validates :transaction_status, presence: true
@@ -35,4 +36,9 @@ class Item < ApplicationRecord
   ## define enum
   enum transaction_status: { draft: 0, sale: 1, shipping: 2, wait_sender_review: 3, wait_recever_review: 4, sold_out: 5, hidden: 6 }
   enum item_status: { new: 0, like_new: 1, good: 2, fair: 3, poor: 4 }, _prefix: true
+  ## scope
+  scope :sales, -> { where(transaction_status: :sale) }
+  scope :drafts, -> { where(transaction_status: :draft) }
+  scope :not_drafts, -> { where.not(transaction_status: :draft) }
+  scope :sold_outs, -> { where.not(transaction_status: :sale).where.not(transaction_status: :draft) }
 end
