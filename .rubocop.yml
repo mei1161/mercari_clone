@@ -59,6 +59,6 @@ Style/RedundantRegexpEscape:
 Metrics/AbcSize:
   Enabled: false
 Layout/LineLength:
-  Max: 150
+  Max: 160
 Metrics/MethodLength:
   Max: 20
