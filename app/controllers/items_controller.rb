@@ -60,9 +60,18 @@ class ItemsController < ApplicationController
     redirect_to items_path if @item.destroy
   end
 
+  def buy
+    @item = Item.find(params[:id])
+    return if current_user.id == @item.user_id
+
+    @item.buyer_id = current_user.id
+    @item.assign_attributes(transaction_status: :shipping)
+    @item.save
+  end
+
   private
 
   def item_params
-    params.require(:item).permit(:category_id, :price, :name, :transaction_status, :include_shipping_fee, :text, :item_status, :buyer_id, { images: [] })
+    params.require(:item).permit(:category_id, :price, :name, :transaction_status, :include_shipping_fee, :text, :item_status, { images: [] })
   end
 end
