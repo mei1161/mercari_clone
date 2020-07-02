@@ -30,6 +30,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.sales.find(params[:id])
+    @comments = @item.comments
   end
 
   def update
