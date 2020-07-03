@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     member do
       post :buy
     end
+    resource :contact, only: [:show]
     resources :comments, only: %i[create destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
