@@ -62,11 +62,17 @@ class ItemsController < ApplicationController
 
   def buy
     @item = Item.find(params[:id])
-    return if current_user.id == @item.user_id
+    redirect_to item_path(@item) if current_user.id == @item.user_id
 
-    @item.buyer_id = current_user.id
-    @item.assign_attributes(transaction_status: :shipping)
-    @item.save
+    if current_user.point >= @item.price
+      current_user.point -= @item.price
+      @item.buyer_id = current_user.id
+      @item.assign_attributes(transaction_status: :shipping)
+      @item.save
+      current_user.point_sell
+    else
+      redirect_to item_path(@item)
+    end
   end
 
   private
