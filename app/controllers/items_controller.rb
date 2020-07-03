@@ -65,11 +65,7 @@ class ItemsController < ApplicationController
     redirect_to item_path(@item) if current_user.id == @item.user_id
 
     if current_user.point >= @item.price
-      current_user.point -= @item.price
-      @item.buyer_id = current_user.id
-      @item.assign_attributes(transaction_status: :shipping)
-      @item.save
-      current_user.point_sell
+      @item.point_buy(current_user)
     else
       redirect_to item_path(@item)
     end
