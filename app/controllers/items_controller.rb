@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.sales.find(params[:id])
+    @item = Item.displays.find(params[:id])
     @comments = @item.comments
   end
 

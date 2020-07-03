@@ -43,7 +43,7 @@ class Item < ApplicationRecord
   scope :drafts, -> { where(transaction_status: :draft) }
   scope :not_drafts, -> { where.not(transaction_status: :draft) }
   scope :sold_outs, -> { where.not(transaction_status: :sale).where.not(transaction_status: :draft) }
-
+  scope :displays, -> { where.not(transaction_status: :draft).where.not(transaction_status: :hidden) }
   def point_buy(user)
     user.point -= price
     self.buyer_id = user.id
