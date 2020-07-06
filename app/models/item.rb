@@ -26,6 +26,7 @@ class Item < ApplicationRecord
   serialize :images
   ## validation
   belongs_to :user
+  belongs_to :address
   belongs_to :category
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy

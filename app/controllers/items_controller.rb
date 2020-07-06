@@ -60,17 +60,6 @@ class ItemsController < ApplicationController
     redirect_to items_path if @item.destroy
   end
 
-  def buy
-    @item = Item.find(params[:id])
-    redirect_to item_path(@item) if current_user.id == @item.user_id
-
-    if current_user.point >= @item.price
-      @item.point_buy(current_user)
-    else
-      redirect_to item_path(@item)
-    end
-  end
-
   private
 
   def item_params

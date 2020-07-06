@@ -24,9 +24,7 @@ Rails.application.routes.draw do
 
   resources :likes, only: %i[create destroy]
   resources :items, only: %i[index show create destroy edit new update] do
-    member do
-      post :buy
-    end
+    resource :procedure, only: %i[show create]
     resource :contact, only: [:show]
     resources :comments, only: %i[create destroy]
   end

@@ -37,6 +37,7 @@ class User < ApplicationRecord
   has_many :likes
   has_many :liked_items, through: :likes, source: :item
   has_many :comments
+  has_many :addresses
   def point_purchase(point_master)
     self.point += point_master.amount
     save
