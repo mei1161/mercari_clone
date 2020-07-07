@@ -35,6 +35,6 @@
   = button_to "削除", item_path(@item), method: :delete, data: { confirm: "are you sure?" }
 = link_to '一覧に戻る', items_path
 - if (@item.user_id != current_user.id) && @item.transaction_status == "sale"
-  = button_to "購入", item_procedure_path(@item), method: :post
+  = button_to "購入", item_procedure_path(@item), method: :get
 - if @item.buyer_id != nil && (current_user.id == @item.buyer_id || current_user.id == @item.user_id )
   = button_to "詳細画面へ", item_contact_path(@item), method: :get

@@ -1,0 +1,31 @@
+%h2= "出品者情報   #{@item.user.name}"
+
+= form_with model: current_user, local: true do |f|
+  .form-group
+    = f.label :zipcode
+    %br
+    = f.text_field :zipcode
+  .form-group
+    = f.label :prefecture
+    %br
+    = f.text_field :prefecture
+  .form-group
+    = f.label :address1
+    %br
+    = f.text_field :address1
+  .form-group
+    = f.label :address2
+    %br
+    = f.text_field :address2
+  .form-group
+    = f.label :name
+    %br
+    = f.text_field :name
+  .form-group
+    = f.label :phone_number
+    %br
+    = f.text_field :phone_number
+
+  /既存の住所がある場合は、プルダウンメニューで選択できるようにする
+
+    

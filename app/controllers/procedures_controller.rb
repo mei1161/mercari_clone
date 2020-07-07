@@ -1,4 +1,5 @@
 class ProceduresController < ApplicationController
+  before_action :authenticate_user!
   def create
     @item = Item.find_by(id: params[:item_id])
     redirect_to item_path(@item) if current_user.id == @item.user_id
@@ -7,5 +8,7 @@ class ProceduresController < ApplicationController
     redirect_to item_path(@item)
   end
 
-  def show; end
+  def show
+    @item = Item.find_by(id: params[:item_id])
+  end
 end
