@@ -20,8 +20,8 @@
 #  index_addresses_on_user_id  (user_id)
 #
 class Address < ApplicationRecord
-  validates :phone_nuber, presence: true, length: { maximum: 11 }, only_integer: true
-  validates :zipcode, presence: true, length: { is: 7 }, only_integer: true
+  validates :phone_nuber, presence: true, length: { maximum: 11 }, numericality: { only_integer: true }
+  validates :zipcode, presence: true, length: { is: 7 }, numericality: { only_integer: true }
   validates :prefecture, presence: true
   has_many :items
   belongs_to :user
