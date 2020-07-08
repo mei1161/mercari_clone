@@ -10,5 +10,7 @@ class ProceduresController < ApplicationController
 
   def show
     @item = Item.find_by(id: params[:item_id])
+    @address = current_user.addresses.build
+    @addresses = current_user.addresses
   end
 end
