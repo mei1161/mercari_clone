@@ -21,7 +21,7 @@
 #  index_addresses_on_user_id  (user_id)
 #
 class Address < ApplicationRecord
-  validates :phone_nuber, presence: true, length: { maximum: 11 }, numericality: { only_integer: true }
+  validates :phone_number, presence: true, length: { maximum: 11 }, numericality: { only_integer: true }
   validates :zipcode, presence: true, length: { is: 7 }, numericality: { only_integer: true }
   validates :prefecture_num, presence: true
   has_many :items
@@ -39,4 +39,8 @@ class Address < ApplicationRecord
     福岡県: 40, 佐賀県: 41, 長崎県: 42, 熊本県: 43, 大分県: 44, 宮崎県: 45, 鹿児島県: 46,
     沖縄県: 47
   }
+
+  def address_info
+    zipcode + prefecture_num.to_s + address1 + address2 + name
+  end
 end

@@ -1,6 +1,8 @@
 class ProceduresController < ApplicationController
   before_action :authenticate_user!
   def create
+    @address = current_user.addresses.build(address_params)
+    @address.save
     @item = Item.find_by(id: params[:item_id])
     redirect_to item_path(@item) if current_user.id == @item.user_id
 
@@ -11,6 +13,11 @@ class ProceduresController < ApplicationController
   def show
     @item = Item.find_by(id: params[:item_id])
     @address = current_user.addresses.build
-    @addresses = current_user.addresses
+  end
+
+  private
+
+  def address_params
+    params[:address].permit(:zipcode, :prefecture_num, :address1, :address2, :name, :phone_number)
   end
 end

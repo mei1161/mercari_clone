@@ -30,6 +30,6 @@
   .form-group
     = f.label :id
   %br
-    = f.select :id, Address.all
+    = f.collection_select :id, Address.where(user_id: current_user.id), :id, :address_info
   = f.submit
     
