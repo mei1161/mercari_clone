@@ -1,6 +1,6 @@
 class ProceduresController < ApplicationController
   before_action :authenticate_user!
-  def create
+  def create # 購入処理のみ
     @item = Item.find_by(id: params[:item_id])
     @address = current_user.addresses.build(address_params)
     if params[:address][:id]

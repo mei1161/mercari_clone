@@ -18,6 +18,7 @@ Metrics/BlockLength:
     - 'spec/**/*'
     - 'app/admin/*'
     - 'lib/tasks/auto_annotate_models.rake'
+    - "config/routes.rb"
 Style/Documentation:
   Enabled: false
 
