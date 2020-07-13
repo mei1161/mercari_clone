@@ -50,7 +50,7 @@ class Item < ApplicationRecord
     self.transaction_status = :shipping
     PointBuyHistory.create(user: purchaser, date: DateTime.now, parent_id: id, point: -price)
     PointSellHistory.create(user: user, date: DateTime.now, parent_id: id, point: price)
-    purchaser.save
+    save
     purchaser.point -= price
     user.point += price
     save
