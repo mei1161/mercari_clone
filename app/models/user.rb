@@ -43,16 +43,4 @@ class User < ApplicationRecord
     save
     PointPurchaseHistory.create(user: self, date: DateTime.now, parent_id: point_master.id, point: point_master.amount)
   end
-
-  def point_sub(item)
-    self.point -= item.price
-    save
-    PointBuyHistory.create(user: self, date: DateTime.now, parent_id: item.id, point: -item.price)
-  end
-
-  def point_add(item)
-    item.user.point += item.price
-    save
-    PointSellHistory.create(user: item.user, date: DateTime.now, parent_id: item.id, point: item.price)
-  end
 end

@@ -1,9 +1,14 @@
 class ProceduresController < ApplicationController
   before_action :authenticate_user!
   def create
-    @address = current_user.addresses.build(address_params)
-    @address.save
     @item = Item.find_by(id: params[:item_id])
+    @address = current_user.addresses.build(address_params)
+    if params[:address][:id]
+      @address = Address.find(params[:address][:id])
+    else
+      @address.save
+    end
+
     redirect_to item_path(@item) if current_user.id == @item.user_id
 
     @item.point_buy(current_user) if current_user.point >= @item.price
