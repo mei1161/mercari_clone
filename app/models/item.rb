@@ -46,12 +46,10 @@ class Item < ApplicationRecord
   scope :sold_outs, -> { where.not(transaction_status: :sale).where.not(transaction_status: :draft) }
   scope :displays, -> { where.not(transaction_status: :draft).where.not(transaction_status: :hidden) }
   def point_buy(user)
-    user.point -= price
+    user.point_sub(self)
     self.buyer_id = user.id
     self.transaction_status = :shipping
     save
-    PointBuyHistory.create(user: user, date: DateTime.now, parent_id: id, point: -price)
-    self.user.point += price
-    PointSellHistory.create(user: self.user, date: DateTime.now, parent_id: id, point: price)
+    self.user.point_add(self)
   end
 end
