@@ -7,8 +7,7 @@
 #  address2       :string
 #  name           :string
 #  phone_number   :string
-#  prefecture     :string
-#  prefecture_num :integer          default(0), not null
+#  prefecture_num :integer          default(NULL), not null
 #  zipcode        :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

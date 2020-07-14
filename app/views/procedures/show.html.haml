@@ -1,4 +1,4 @@
-= form_with model: @address, url: item_procedure_path(@item), local: true do |f|
+= form_with model: @address, url: add_address_item_procedure_path(@item), local: true do |f|
   .form-group
     = f.label :zipcode
     %br
@@ -26,10 +26,10 @@
   %br
   = f.submit
   /既存の住所がある場合は、プルダウンメニューで選択できるようにする
-= form_with model: @address, url: add_address_item_procedure_path(@item), local: true do |f|
+= form_with model: @address, url: item_procedure_path(@item), local: true do |f|
   .form-group
     = f.label :id
   %br
-    = f.collection_select :id, Address.where(user_id: current_user.id), :id, :address_info
+    = f.collection_select :id, Address.where(user: current_user), :id, :address_info
   = f.submit
     

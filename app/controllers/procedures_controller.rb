@@ -1,17 +1,16 @@
 class ProceduresController < ApplicationController
   before_action :authenticate_user!
   def create
-    @item = Item.find_by(id: params[:item_id])
-    
-    if params[:address][:id]
-      @address = Address.find(params[:address][:id])
-    else
-      @address.save
-    end
-
+    @item = Item.find(params[:item_id])
     redirect_to item_path(@item) if current_user.id == @item.user_id
+    @address = current_user.addresses.build(address_params)
+    @address = Address.find(params[:address][:id])
+    @item.buyer_address_id = @address.id
 
-    @item.point_buy(current_user) if current_user.point >= @item.price
+    if current_user.point >= @item.price
+      @item.point_buy(current_user)
+      @item.save
+    end
     redirect_to item_path(@item)
   end
 
@@ -21,8 +20,9 @@ class ProceduresController < ApplicationController
   end
 
   def add_address
+    @item = Item.find(params[:item_id])
     @address = current_user.addresses.build(address_params)
-    if @address.save
+    redirect_to item_procedure_path(@item) if @address.save
   end
 
   private

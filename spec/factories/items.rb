@@ -12,6 +12,7 @@
 #  transaction_status   :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  buyer_address_id     :bigint
 #  buyer_id             :bigint
 #  category_id          :bigint
 #  user_id              :bigint
