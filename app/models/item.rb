@@ -26,7 +26,7 @@ class Item < ApplicationRecord
   serialize :images
   ## validation
   belongs_to :user
-  belongs_to :buyer, optional: true
+  belongs_to :buyer, optional: true, class_name: 'User', foreign_key: 'user_id'
   belongs_to :address, optional: true
   belongs_to :category
   has_many :likes, dependent: :destroy

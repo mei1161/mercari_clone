@@ -1,8 +1,8 @@
 class ProceduresController < ApplicationController
   before_action :authenticate_user!
-  def create # 購入処理のみ
+  def create
     @item = Item.find_by(id: params[:item_id])
-    @address = current_user.addresses.build(address_params)
+    
     if params[:address][:id]
       @address = Address.find(params[:address][:id])
     else
@@ -18,6 +18,11 @@ class ProceduresController < ApplicationController
   def show
     @item = Item.find_by(id: params[:item_id])
     @address = current_user.addresses.build(item_id: @item.id)
+  end
+
+  def add_address
+    @address = current_user.addresses.build(address_params)
+    if @address.save
   end
 
   private
