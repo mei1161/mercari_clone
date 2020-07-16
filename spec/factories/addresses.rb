@@ -21,6 +21,6 @@
 #
 FactoryBot.define do
   factory :address do
-    
+    address1
   end
 end
