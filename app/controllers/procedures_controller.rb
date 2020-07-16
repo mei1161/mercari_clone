@@ -3,7 +3,6 @@ class ProceduresController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     redirect_to item_path(@item) if current_user.id == @item.user_id
-    @address = current_user.addresses.build(address_params)
     @address = Address.find(params[:address][:id])
     @item.buyer_address_id = @address.id
 

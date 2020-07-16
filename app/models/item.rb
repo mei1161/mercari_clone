@@ -28,8 +28,8 @@ class Item < ApplicationRecord
   ## validation
   belongs_to :user
   belongs_to :buyer, optional: true, class_name: 'User'
-  belongs_to :address, optional: true
   belongs_to :category
+  belongs_to :address, foreign_key: true, optional: true
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   validates :price, presence: true, numericality: { greater_than: 5 }
@@ -49,7 +49,7 @@ class Item < ApplicationRecord
   scope :displays, -> { where.not(transaction_status: :draft).where.not(transaction_status: :hidden) }
 
   def point_buy(purchaser)
-    buyer = purchaser
+    self.buyer = purchaser
     self.transaction_status = :shipping
     save
     pp buyer
