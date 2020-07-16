@@ -3,31 +3,33 @@ class ProceduresController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     redirect_to item_path(@item) if current_user.id == @item.user_id
-    if @item.buyer.nil?
-      @item.buyer_address_id = @address.id
-    else
+    @address = current_user.addresses.find(params[:address][:id])
+    if @item.buyer.present?
       redirect_to item_path(@item)
+      return
     end
 
-    @address = current_user.addresses.find(params[:address][:id])
-    if @address.user_id != current_user.id
+    @item.address = @address
+
+    if current_user.point < @item.price
       redirect_to item_path(@item)
-    if current_user.point >= @item.price
-      @item.point_buy(current_user)
-      @item.save
+      return
     end
-    redirect_to item_path(@item)
+    @item.point_buy(current_user)
+    @item.save
+    redirect_to item_contact_path(@item)
   end
 
   def show
-    @item = Item.find_by(id: params[:item_id])
-    @address = current_user.addresses.build(item_id: @item.id)
+    @item = Item.find(params[:item_id])
+    @address = current_user.addresses.build
   end
 
   def add_address
     @item = Item.find(params[:item_id])
     @address = current_user.addresses.build(address_params)
-    redirect_to item_procedure_path(@item) if @address.save
+    @address.save
+    redirect_to item_procedure_path(@item)
   end
 
   private
