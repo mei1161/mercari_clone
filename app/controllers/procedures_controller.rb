@@ -12,7 +12,6 @@ class ProceduresController < ApplicationController
     @address = current_user.addresses.find(params[:address][:id])
     if @address.user_id != current_user.id
       redirect_to item_path(@item)
-    
     if current_user.point >= @item.price
       @item.point_buy(current_user)
       @item.save
