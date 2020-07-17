@@ -27,7 +27,12 @@ Rails.application.routes.draw do
         post :add_address
       end
     end
-    resource :contact, only: [:show]
+    resource :contact, only: [:show] do
+      member do
+        post :change_status
+      end
+    end
+
     resources :comments, only: %i[create destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
