@@ -24,6 +24,7 @@ class Address < ApplicationRecord
   validates :zipcode, presence: true, length: { is: 7 }, numericality: { only_integer: true }
   validates :prefecture_num, presence: true
   has_many :items
+  has_many :buy_items, class_name: 'Item'
   belongs_to :user
 
   enum prefecture_num: {

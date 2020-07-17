@@ -9,7 +9,7 @@ class ProceduresController < ApplicationController
       return
     end
 
-    @item.address = @address
+    @item.buyer_address = @address
 
     if current_user.point < @item.price
       redirect_to item_path(@item)
