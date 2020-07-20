@@ -29,7 +29,7 @@ class Item < ApplicationRecord
   belongs_to :user
   belongs_to :buyer, optional: true, class_name: 'User'
   belongs_to :category
-  belongs_to :buyer_address, foreign_key: 'buyer_address_id', optional: true
+  belongs_to :buyer_address, foreign_key: 'buyer_address_id', optional: true, class_name: 'Address'
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   validates :price, presence: true, numericality: { greater_than: 5 }
