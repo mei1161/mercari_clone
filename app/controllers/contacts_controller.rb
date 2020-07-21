@@ -7,9 +7,12 @@ class ContactsController < ApplicationController
       return
     end
 
-    render 'buyer_contact' if current_user == @item.buyer
+    if current_user == @item.buyer && @item.transaction_status == 'shipping'
+      render 'buyer_wait_sending'
+    elsif current_user == @item.buyer
+      render 'buyer_contact'
+    end
     render 'owner_contact' if current_user == @item.user
-
   end
 
   def change_status
