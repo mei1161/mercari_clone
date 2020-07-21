@@ -1,3 +1,6 @@
-- @drafts.each do |item|
-  %ul
-    %li= link_to "#{item.name}", draft_path(item.id)
+- if @drafts.present?
+  - @drafts.each do |item|
+    %ul
+      %li= link_to "#{item.name}", draft_path(item.id)
+- else
+  %p 下書きはありません
