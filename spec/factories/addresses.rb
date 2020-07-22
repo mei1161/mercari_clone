@@ -21,5 +21,11 @@
 #
 FactoryBot.define do
   factory :address do
+    address1 { 'address1' }
+    address2 { 'address2' }
+    name { '太郎' }
+    phone_number {'01234567890'}
+    zipcode { '1234567' }
+    prefecture_num { '北海道' }
   end
 end

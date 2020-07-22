@@ -1,6 +1,7 @@
 class ProceduresController < ApplicationController
   before_action :authenticate_user!
   def create
+    pp params
     @item = Item.find(params[:item_id])
     redirect_to item_path(@item) if current_user.id == @item.user_id
     @address = current_user.addresses.find(params[:address][:id])
