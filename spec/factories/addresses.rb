@@ -28,4 +28,13 @@ FactoryBot.define do
     zipcode { '1234567' }
     prefecture_num { '北海道' }
   end
+
+  factory :invalid_address_params, class: Address do
+    address1 { 'invalid_address1' }
+    address2 { 'address2' }
+    name { '太郎' }
+    phone_number {'01234567890'}
+    zipcode { '1234567' }
+  end
+
 end
