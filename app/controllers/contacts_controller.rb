@@ -35,5 +35,4 @@ class ContactsController < ApplicationController
       render 'owner_wait_review'
     end
   end
-
 end
