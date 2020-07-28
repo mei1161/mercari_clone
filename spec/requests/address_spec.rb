@@ -7,8 +7,10 @@ RSpec.describe 'addresses', type: :request do
   let(:address) {create(:address, user_id: user.id)}
   let(:item_params) { attributes_for(:item, user_id: user2.id, category_id: category.id) }
   let(:item) { create(:item, user_id: user2.id, category_id: category.id) }
+  let(:address) { create(:address, user_id: user.id) }
   let(:address_params) { attributes_for(:address, user_id: user.id)}
   let(:invalid_address_params) { attributes_for(:invalid_address_params, user_id: user.id)}
+  let(:point_master) { create(:point_master) }
   describe 'POST address' do
     it '新しく住所を登録できること' do
       user.confirm
@@ -29,5 +31,23 @@ RSpec.describe 'addresses', type: :request do
       expect(failed_item).to be_nil
     end
   end
+
+  describe 'POST procedures' do
+    it '住所を登録して購入をすることができる' do
+      user.confirm
+      user2.confirm
+      sign_in user
+      category
+      item
+      address
+      post purchase_path, params:{ point_master_id: point_master.id } 
+      get item_path(item)
+      get item_procedure_path(item)
+      post item_procedure_path(item), params: { address: {id: address.id} }
+      buy_item = Item.find(item.id)
+      expect(buy_item.buyer_id).to eq(user.id)
+    end
+  end
+
 
 end
