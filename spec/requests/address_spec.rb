@@ -7,6 +7,7 @@ RSpec.describe 'addresses', type: :request do
   let(:address) {create(:address, user_id: user.id)}
   let(:item_params) { attributes_for(:item, user_id: user2.id, category_id: category.id) }
   let(:item) { create(:item, user_id: user2.id, category_id: category.id) }
+  let(:my_item) { create(:item, user_id: user.id, category_id: category.id) }
   let(:address) { create(:address, user_id: user.id) }
   let(:address_params) { attributes_for(:address, user_id: user.id)}
   let(:invalid_address_params) { attributes_for(:invalid_address_params, user_id: user.id)}
@@ -46,6 +47,20 @@ RSpec.describe 'addresses', type: :request do
       post item_procedure_path(item), params: { address: {id: address.id} }
       buy_item = Item.find(item.id)
       expect(buy_item.buyer_id).to eq(user.id)
+    end
+  end
+
+  describe 'POST procedures' do
+    it '自分の出品したものは購入できない' do
+      user.confirm
+      sign_in user
+      category
+      my_item
+      address
+      get item_path(my_item)
+      post item_procedure_path(my_item), params: { address: {id: address.id} }
+      buy_item = Item.find(my_item.id)
+      expect(buy_item.buyer_id).to be_nil
     end
   end
 
