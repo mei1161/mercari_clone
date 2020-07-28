@@ -216,3 +216,8 @@ Style/StringLiterals:
 # URISchemes: http, https
 Layout/LineLength:
   Max: 198
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/PerceivedComplexity:
+  Max: 15
+
