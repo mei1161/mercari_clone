@@ -7,17 +7,8 @@ class ContactsController < ApplicationController
       return
     end
 
-    if current_user == @item.buyer && @item.transaction_status == 'shipping'
-      render 'buyer_wait_sending'
-    elsif current_user == @item.buyer
-      render 'buyer_contact'
-    end
-
-    if current_user == @item.user && @item.transaction_status == 'shipping'
-      render 'owner_contact'
-    elsif current_user == @item.user
-      render 'owner_wait_review'
-    end
+    buyer_pattern
+    user_pattern
   end
 
   def change_status
@@ -26,4 +17,23 @@ class ContactsController < ApplicationController
     @item.save
     redirect_to item_contact_path(@item)
   end
+
+  private
+
+  def buyer_pattern
+    if current_user == @item.buyer && @item.transaction_status == 'shipping'
+      render 'buyer_wait_sending'
+    elsif current_user == @item.buyer
+      render 'buyer_contact'
+    end
+  end
+
+  def user_pattern
+    if current_user == @item.user && @item.transaction_status == 'shipping'
+      render 'owner_contact'
+    elsif current_user == @item.user
+      render 'owner_wait_review'
+    end
+  end
+
 end
