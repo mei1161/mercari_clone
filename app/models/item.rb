@@ -54,9 +54,9 @@ class Item < ApplicationRecord
     save
     buyer.point -= price
     user.point += price
+    buyer.save
     user.save
     PointBuyHistory.create(user: buyer, date: DateTime.now, parent_id: id, point: -price)
     PointSellHistory.create(user: user, date: DateTime.now, parent_id: id, point: price)
-    save
   end
 end

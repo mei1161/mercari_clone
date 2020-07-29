@@ -52,6 +52,24 @@ RSpec.describe 'addresses', type: :request do
   end
 
   describe 'POST procedures' do
+    it '住所を登録して購入をすると、ポイントが減る' do
+      user.confirm
+      user2.confirm
+      sign_in user
+      category
+      item
+      address
+      post purchase_path, params:{ point_master_id: point_master.id } 
+      get item_path(item)
+      get item_procedure_path(item)
+      post item_procedure_path(item), params: { address: {id: address.id} }
+      user1 = User.find(user.id)
+      expect(user1.point).to eq(user.point - item.price)
+      
+    end
+  end
+
+  describe 'POST procedures' do
     it '自分の出品したものは購入できない' do
       user.confirm
       sign_in user
@@ -73,7 +91,6 @@ RSpec.describe 'addresses', type: :request do
       category
       item
       user2_address
-      pp user2.addresses
       post purchase_path, params:{ point_master_id: point_master.id } 
       get item_path(item)
       get item_procedure_path(item)
