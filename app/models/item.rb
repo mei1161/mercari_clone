@@ -52,7 +52,6 @@ class Item < ApplicationRecord
     self.buyer = purchaser
     self.transaction_status = :shipping
     save
-    pp buyer.point
     buyer.point -= price
     user.point += price
     user.save
