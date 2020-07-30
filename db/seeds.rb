@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
-User.create!(email: 'ichigo990601@gmail.com', name: 'mei', password: 'password', password_confirmation: 'password', confirmed_at: DateTime.now)
-User.create!(email: 'admin@example.com', name: 'meisan', password: 'password', password_confirmation: 'password', confirmed_at: DateTime.now)
+User.create!(email: 'user1@example.com', name: 'test_user1', password: 'password', password_confirmation: 'password', confirmed_at: DateTime.now)
+User.create!(email: 'admin@example.com', name: 'test_user2', password: 'password', password_confirmation: 'password', confirmed_at: DateTime.now)
 PointMaster.create!(amount: 100, price: 120, started_at: DateTime.now, ended_at: '2025-12-31')
 PointMaster.create!(amount: 500, price: 520, started_at: DateTime.now, ended_at: '2025-12-31')
 PointMaster.create!(amount: 1000, price: 1020, started_at: DateTime.now, ended_at: '2025-12-31')
