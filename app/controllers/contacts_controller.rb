@@ -12,8 +12,6 @@ class ContactsController < ApplicationController
     elsif current_user == @item.buyer
       buyer_pattern
     end
-
-
   end
 
   def change_status
