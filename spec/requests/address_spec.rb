@@ -65,7 +65,6 @@ RSpec.describe 'addresses', type: :request do
       post item_procedure_path(item), params: { address: {id: address.id} }
       user1 = User.find(user.id)
       expect(user1.point).to eq(user.point - item.price)
-      
     end
   end
 

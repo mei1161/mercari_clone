@@ -7,8 +7,13 @@ class ContactsController < ApplicationController
       return
     end
 
-    buyer_pattern
-    user_pattern
+    if current_user == @item.user
+      user_pattern
+    elsif current_user == @item.buyer
+      buyer_pattern
+    end
+
+
   end
 
   def change_status
@@ -18,20 +23,43 @@ class ContactsController < ApplicationController
     redirect_to item_contact_path(@item)
   end
 
+  def evaluate_user
+    @item = Item.find(params[:item_id])
+    if current_user == @item.buyer
+      @item.transaction_status = :wait_recever_review
+      redirect_to item_contact_path(@item)
+    elsif current_user == @item.user
+      @item.transaction_status = :sold_out
+      redirect_to item_contact_path(@item)
+      @item.point_transfer
+    end
+    @item.save
+  end
+
   private
 
   def buyer_pattern
-    if current_user == @item.buyer && @item.transaction_status == 'shipping'
+    case @item.transaction_status
+    when 'shipping'
       render 'buyer_wait_sending'
-    elsif current_user == @item.buyer
+    when 'wait_recever_review'
+      render 'buyer_wait_review'
+    when 'sold_out'
+      render 'transaction_competed'
+    else
       render 'buyer_contact'
     end
   end
 
   def user_pattern
-    if current_user == @item.user && @item.transaction_status == 'shipping'
+    case @item.transaction_status
+    when 'shipping'
       render 'owner_contact'
-    elsif current_user == @item.user
+    when 'wait_recever_review'
+      render 'owner_review'
+    when 'sold_out'
+      render 'transaction_competed'
+    else
       render 'owner_wait_review'
     end
   end

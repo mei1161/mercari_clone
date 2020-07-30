@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resource :contact, only: [:show] do
       member do
         post :change_status
+        post :evaluate_user
       end
     end
 

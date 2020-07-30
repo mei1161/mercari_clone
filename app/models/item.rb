@@ -53,10 +53,13 @@ class Item < ApplicationRecord
     self.transaction_status = :shipping
     save
     buyer.point -= price
-    user.point += price
     buyer.save
-    user.save
     PointBuyHistory.create(user: buyer, date: DateTime.now, parent_id: id, point: -price)
+  end
+
+  def point_transfer
+    user.point += price
+    user.save
     PointSellHistory.create(user: user, date: DateTime.now, parent_id: id, point: price)
   end
 end
