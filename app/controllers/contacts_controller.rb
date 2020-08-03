@@ -28,8 +28,8 @@ class ContactsController < ApplicationController
       redirect_to item_contact_path(@item)
     elsif current_user == @item.user
       @item.transaction_status = :sold_out
-      redirect_to item_contact_path(@item)
       @item.point_transfer
+      redirect_to item_contact_path(@item)
     end
     @item.save
   end

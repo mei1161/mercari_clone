@@ -42,4 +42,26 @@ FactoryBot.define do
     include_shipping_fee { true }
     images { [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/factories/images/test.jpg'))] }
   end
+
+  factory :shipping_item, class: Item do
+    price { 400 }
+    name { 'hogehogehoge' }
+    transaction_status { 'wait_sender_review' }
+    item_status { 'new' }
+    text { 'hogehoge' }
+    include_shipping_fee { true }
+    images { [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/factories/images/test.jpg'))] }
+  end
+
+  factory :sold_item, class: Item do
+    price { 400 }
+    name { 'hogehogehoge' }
+    transaction_status { 'wait_recever_review' }
+    item_status { 'new' }
+    text { 'hogehoge' }
+    include_shipping_fee { true }
+    images { [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/factories/images/test.jpg'))] }
+  end
+
+
 end
