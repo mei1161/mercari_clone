@@ -47,7 +47,8 @@ RSpec.describe 'items', type: :request do
       post evaluate_user_item_contact_path(sold_item)
       item3 = Item.find(sold_item.id)
       expect(item3.transaction_status).to eq('sold_out')
-      pp user2
+      owner = User.find(user2.id)
+      expect(owner.point).to eq(item3.price)
     end
   end
 end
