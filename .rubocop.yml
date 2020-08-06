@@ -18,6 +18,7 @@ Metrics/BlockLength:
     - 'spec/**/*'
     - 'app/admin/*'
     - 'lib/tasks/auto_annotate_models.rake'
+    - "config/routes.rb"
 Style/Documentation:
   Enabled: false
 
@@ -59,6 +60,10 @@ Style/RedundantRegexpEscape:
 Metrics/AbcSize:
   Enabled: false
 Layout/LineLength:
-  Max: 150
+  Max: 160
 Metrics/MethodLength:
   Max: 20
+Metrics/PerceivedComplexity:
+  Max: 15
+Metrics/CyclomaticComplexity:
+  Max: 15

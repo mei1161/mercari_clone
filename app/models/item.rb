@@ -12,6 +12,8 @@
 #  transaction_status   :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  buyer_address_id     :bigint
+#  buyer_id             :bigint
 #  category_id          :bigint
 #  user_id              :bigint
 #
@@ -25,7 +27,9 @@ class Item < ApplicationRecord
   serialize :images
   ## validation
   belongs_to :user
+  belongs_to :buyer, optional: true, class_name: 'User'
   belongs_to :category
+  belongs_to :buyer_address, foreign_key: 'buyer_address_id', optional: true, class_name: 'Address'
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   validates :price, presence: true, numericality: { greater_than: 5 }
@@ -42,4 +46,20 @@ class Item < ApplicationRecord
   scope :drafts, -> { where(transaction_status: :draft) }
   scope :not_drafts, -> { where.not(transaction_status: :draft) }
   scope :sold_outs, -> { where.not(transaction_status: :sale).where.not(transaction_status: :draft) }
+  scope :displays, -> { where.not(transaction_status: :draft).where.not(transaction_status: :hidden) }
+
+  def point_buy(purchaser)
+    self.buyer = purchaser
+    self.transaction_status = :shipping
+    save
+    buyer.point -= price
+    buyer.save
+    PointBuyHistory.create(user: buyer, date: DateTime.now, parent_id: id, point: -price)
+  end
+
+  def point_transfer
+    user.point += price
+    user.save
+    PointSellHistory.create(user: user, date: DateTime.now, parent_id: id, point: price)
+  end
 end

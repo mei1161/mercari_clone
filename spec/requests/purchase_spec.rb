@@ -8,7 +8,7 @@ RSpec.describe 'purchases', type: :request do
     it 'ポイントの購入ができること' do
       user.confirm
       sign_in user
-      expect{ post purchase_path, params:{ point_master_id: point_master.id } }.to change{ user.point }.from(0).to(100)
+      expect{ post purchase_path, params:{ point_master_id: point_master.id } }.to change{ user.point }.from(0).to(10000)
     end
   end
 end
