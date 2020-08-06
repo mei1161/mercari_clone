@@ -1,0 +1,2 @@
+class EvalutionsController < ApplicationController
+end
