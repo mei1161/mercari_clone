@@ -32,6 +32,7 @@ class Item < ApplicationRecord
   belongs_to :buyer_address, foreign_key: 'buyer_address_id', optional: true, class_name: 'Address'
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :evalutions
   validates :price, presence: true, numericality: { greater_than: 5 }
   validates :name, presence: true
   validates :transaction_status, presence: true
