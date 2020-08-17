@@ -2,13 +2,14 @@
 #
 # Table name: evalutions
 #
-#  id         :bigint           not null, primary key
-#  text       :text
-#  type       :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  item_id    :bigint
-#  user_id    :bigint
+#  id               :bigint           not null, primary key
+#  status           :integer
+#  text             :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  evaluted_user_id :bigint
+#  item_id          :bigint
+#  user_id          :bigint
 #
 # Indexes
 #

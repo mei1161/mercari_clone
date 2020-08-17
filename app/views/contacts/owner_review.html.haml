@@ -1,4 +1,15 @@
 %p 相手が商品を受け取りました。
 
 %p 取引相手を評価してください
-= button_to '評価する',evaluate_user_item_contact_path(@item)
+= form_with model: @evalution, url: evaluate_user_item_contact_path(@item), local: true do |f|
+  .form-group
+    = f.label :status
+    %br
+    = f.select :status, options_for_select(Evalution.statuses.keys)
+  .form-group
+    = f.label :text
+    %br
+    = f.text_field :text
+  = f.hidden_field :user_id, value: @item.buyer_id
+  = f.hidden_field :evaluted_user_id, value: @item.user_id
+  = f.submit
