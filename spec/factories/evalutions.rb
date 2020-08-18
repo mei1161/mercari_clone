@@ -18,6 +18,7 @@
 #
 FactoryBot.define do
   factory :evalution do
-    
+    status { 'good' }
+    text { 'aaaa' }
   end
 end

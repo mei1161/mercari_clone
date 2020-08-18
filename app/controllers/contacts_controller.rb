@@ -36,6 +36,7 @@ class ContactsController < ApplicationController
 
     pp @evalution
     pp @item.evalutions
+    pp params
     @evalution.save!
     @item.save!
   end

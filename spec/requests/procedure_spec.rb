@@ -11,7 +11,9 @@ RSpec.describe 'items', type: :request do
   let(:point_master) { create(:point_master) }
   let(:item) { create(:item, user_id: user2.id, category_id: category.id) }
   let(:shipping_item) { create(:shipping_item, user_id: user2.id, category_id: category.id, buyer_id: user.id, buyer_address_id: address.id)}
+  let(:evalution) { create(:evalution, user_id: user2.id, evaluted_user_id: user.id)}
   let(:sold_item) { create(:sold_item,user_id: user2.id, category_id: category.id, buyer_id: user.id, buyer_address_id: address.id)}
+  let(:evalution_params) { attributes_for(:evalution, user_id: user.id, evaluted_user_id: user2.id, item_id: sold_item.id)}
 
   describe 'POST procedures' do
     it 'statusをwait_sender_reviewにできる' do
@@ -44,7 +46,7 @@ RSpec.describe 'items', type: :request do
       user2.confirm
       sign_in user2
       sold_item
-      post evaluate_user_item_contact_path(sold_item)
+      post evaluate_user_item_contact_path(sold_item), params: { evalution_params }
       item3 = Item.find(sold_item.id)
       expect(item3.transaction_status).to eq('sold_out')
       owner = User.find(user2.id)
