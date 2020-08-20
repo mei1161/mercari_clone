@@ -21,4 +21,9 @@ FactoryBot.define do
     status { 'good' }
     text { 'aaaa' }
   end
+  
+  factory :evalution_params, class: Evalution do
+    status { 'good' }
+    text { 'aaaaa' }
+  end
 end
