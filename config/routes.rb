@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     confirmations: 'users/confirmations'
   }
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resources :evalutions, only: [:index]
+  end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
@@ -33,7 +35,7 @@ Rails.application.routes.draw do
         post :evaluate_user
       end
     end
-    resources :evalutions, only: [:index]
+    
     resources :comments, only: %i[create destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
