@@ -1,7 +1,7 @@
-%p= current_user.name
+%p= @user.name
 %h2 説明
-%p= current_user.biography
-%h3= link_to '評価一覧', user_evalutions_path(user.id)
+%p= @user.biography
+%h3= link_to '評価一覧', user_evalutions_path(@user.id)
 %h3 出品一覧
 - @items.each do |item|
   %ul

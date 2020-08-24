@@ -1,6 +1,6 @@
 %h2= @item.name
 %ul
-  %li="出品者 #{@item.user.name}"
+  %li= link_to"出品者 #{@item.user.name}", user_path(@item.user.id)
   %li= "カテゴリー #{@item.category.name}"
   %li= "transaction_status #{@item.transaction_status}"
   %li= "商品の状態 #{@item.item_status}"
