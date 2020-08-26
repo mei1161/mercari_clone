@@ -23,15 +23,18 @@ class ContactsController < ApplicationController
 
   def evaluate_user
     @item = Item.find(params[:item_id])
+    @evalution = @item.evalutions.build(evalution_params)
     if current_user == @item.buyer
+      @evalution.save!
       @item.transaction_status = :wait_recever_review
       redirect_to item_contact_path(@item)
     elsif current_user == @item.user
+      @evalution.save!
       @item.transaction_status = :sold_out
       @item.point_transfer
       redirect_to item_contact_path(@item)
     end
-    @item.save
+    @item.save!
   end
 
   private
@@ -60,5 +63,9 @@ class ContactsController < ApplicationController
     else
       render 'owner_wait_review'
     end
+  end
+
+  def evalution_params
+    params.require(:evalution).permit(:status, :text, :user_id, :evaluted_user_id)
   end
 end
