@@ -61,10 +61,12 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'activeadmin'
 gem 'annotate'
+gem 'bootstrap'
 gem 'carrierwave'
 gem 'devise'
 gem 'dotenv-rails'
 gem 'haml-rails'
+gem 'jquery-rails'
 gem 'letter_opener'
 gem 'letter_opener_web'
 gem 'rails-i18n'
