@@ -1,13 +1,8 @@
 .container
   - if user_signed_in?
     %ul.list-group
-      %li.list-group-item= link_to 'ログアウト', destroy_user_session_path, method: :delete
-      %li.list-group-item= link_to '更新', edit_user_registration_path
-      %li.list-group-item= link_to 'ポイント購入', purchase_path
-      %li.list-group-item= link_to 'ポイント履歴', point_histories_path
-      %li.list-group-item= link_to 'アイテム新規作成', new_item_path
-      %li.list-group-item= link_to 'マイページ', user_path(current_user.id)
-      %li.list-group-item= link_to '下書き一覧', drafts_path
-    %ul
+      %li.list-group-item= link_to 'Mypage', mypage_path
+    %h2 商品一覧
+    %ul.list-group
       - @items.each do |item|
-        %li= link_to "#{item.name}", item_path(item)
+        %li.list-group-item= link_to "#{item.name}", item_path(item)

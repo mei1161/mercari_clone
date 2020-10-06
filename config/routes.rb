@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root 'items#index'
+  get 'mypage', to: 'static_pages#mypage'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
